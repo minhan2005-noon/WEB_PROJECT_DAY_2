@@ -11,10 +11,11 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public'))); // Phục vụ giao diện tĩnh từ thư mục 'public'
 
 // 2. Kết nối Cơ sở dữ liệu MongoDB (Thay thế URI nếu sử dụng MongoDB Atlas)
-const MONGO_URI = 'mongodb://127.0.0.1:27017/minh_an_db';
-mongoose.connect(MONGO_URI)
-    .then(() => console.log('👉 Kết nối thành công tới cơ sở dữ liệu MongoDB!'))
-    .catch(err => console.error('❌ Lỗi kết nối cơ sở dữ liệu:', err));
+// Thay đoạn cũ bằng đoạn này:
+const dbURI = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/ten_database_cua_ban';
+mongoose.connect(dbURI)
+  .then(() => console.log("Kết nối thành công!"))
+  .catch(err => console.log("Lỗi kết nối:", err));
 
 // 3. Định nghĩa Schemas & Models (Mongoose)
 // Schema cho người dùng
