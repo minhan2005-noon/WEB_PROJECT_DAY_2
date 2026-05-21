@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ÂN ĐÂY</title>
+    <script>
+        if (localStorage.getItem('isLoggedIn') !== 'true') { window.location.href = 'dang-nhap.html'; }
+    </script>
+    <style>
+        :root { --primary: #4f46e5; --accent: #0ea5e9; --dark: #1e1b4b; --bg: #f8fafc; --text: #334155; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
+        body { background-color: var(--bg); color: var(--text); line-height: 1.6; }
+        
+        /* Navbar */
+        nav { background: var(--dark); padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; }
+        nav .logo { color: #fff; font-size: 1.5rem; font-weight: bold; }
+        nav ul { display: flex; list-style: none; align-items: center; }
+        nav ul li { margin-left: 1.5rem; }
+        nav ul li a { color: #cbd5e1; text-decoration: none; font-weight: 500; transition: 0.3s; }
+        nav ul li a.active, nav ul li a:hover { color: var(--accent); }
+        .btn-logout { background: #ef4444; color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer; font-weight: bold; }
+
+        /* Hero */
+        .hero { background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%); color: white; padding: 6rem 5%; text-align: center; }
+        .hero h1 { font-size: 3rem; margin-bottom: 1rem; letter-spacing: 1px; }
+        .hero p { color: #cbd5e1; font-size: 1.2rem; max-width: 700px; margin: 0 auto; }
+
+        .container { padding: 4rem 5%; max-width: 1400px; margin: 0 auto; }
+        h2 { font-size: 2.2rem; color: var(--dark); margin-bottom: 1.5rem; text-align: center; position: relative; }
+        h2::after { content: ''; display: block; width: 60px; height: 4px; background: var(--primary); margin: 10px auto 0; border-radius: 2px; }
+        
+        /* Section Giải Pháp */
+        .solutions-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-bottom: 5rem; }
+        .sol-card { background: white; padding: 2.5rem; border-radius: 16px; border-left: 5px solid var(--accent); box-shadow: 0 4px 6px rgba(0,0,0,0.02); }
+        .sol-card h3 { color: var(--dark); margin-bottom: 1rem; font-size: 1.3rem; }
+
+        /* Section Nguồn Lực */
+        .resources-section { background: white; padding: 3rem; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.03); margin-bottom: 5rem; }
+        .res-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 2rem; }
+        .res-item { text-align: center; padding: 1.5rem; background: #f8fafc; border-radius: 12px; }
+        .res-item .icon { font-size: 2.5rem; margin-bottom: 1rem; display: block; }
+        .res-item h4 { color: var(--primary); font-size: 1.2rem; margin-bottom: 0.5rem; }
+
+        /* Section 30 Sản phẩm */
+        .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 2rem; }
+        .prod-card { background: white; border-radius: 16px; padding: 1.5rem; border: 1px solid #e2e8f0; box-shadow: 0 4px 6px rgba(0,0,0,0.02); transition: 0.3s; display: flex; flex-direction: column; justify-content: space-between; }
+        .prod-card:hover { transform: translateY(-5px); box-shadow: 0 12px 20px rgba(0,0,0,0.05); }
+        .prod-card .tag { background: #eef2ff; color: var(--primary); padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600; display: inline-block; margin-bottom: 1rem; width: fit-content; }
+        .prod-card h4 { color: var(--dark); font-size: 1.25rem; margin-bottom: 0.5rem; }
+        .prod-card p { font-size: 0.9rem; color: #64748b; margin-bottom: 1.5rem; }
+        .btn-view { display: block; text-align: center; background: var(--dark); color: white; padding: 0.6rem; border-radius: 8px; text-decoration: none; font-weight: 500; transition: 0.3s; }
+        .btn-view:hover { background: var(--primary); }
+
+        footer { background: var(--dark); color: #94a3b8; text-align: center; padding: 2rem; font-size: 0.9rem; margin-top: 5rem; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">MINH ÂN</div>
+        <ul>
+            <li><a href="index.html" class="active">Trang Chủ</a></li>
+            <li><a href="thong-tin.html">Thông Tin</a></li>
+            <li><a href="ve-toi.html">Về Tôi</a></li>
+            <li><a href="mua-hang.html">Mua Hàng</a></li>
+            <li><a href="thanh-toan.html">Thanh Toán</a></li>
+            <li><a href="lien-he.html">Liên Hệ & FB</a></li>
+            <li><button class="btn-logout" onclick="localStorage.removeItem('isLoggedIn'); window.location.href='dang-nhap.html';">Đăng Xuất</button></li>
+        </ul>
+    </nav>
+
+    <div class="hero">
+        <h1>TẬP ĐOÀN CÔNG NGHỆ MINH ÂN</h1>
+        <p>Hệ sinh thái giải pháp số toàn diện mang tính đột phá toàn cầu mang thương hiệu cốt lõi ÂN ĐÂY.</p>
+    </div>
+
+    <div class="container">
+        
+        <!-- HẠNG MỤC GIẢI PHÁP -->
+        <h2>Giải Pháp Chiến Lược</h2>
+        <div class="solutions-grid">
+            <div class="sol-card">
+                <h3>1. Giải pháp Hệ sinh thái Thiết bị Cá nhân</h3>
+                <p>Đồng bộ hóa toàn bộ dữ liệu người dùng thời gian thực thông qua tài khoản đám mây bảo mật cao của MINH ÂN.</p>
+            </div>
+            <div class="sol-card">
+                <h3>2. Giải pháp Nhà thông minh & Tự động hóa</h3>
+                <p>Hệ thống IoT kết nối không dây, cho phép điều khiển toàn bộ thiết bị điện gia dụng thông qua AI nhận diện giọng nói.</p>
+            </div>
+            <div class="sol-card">
+                <h3>3. Giải pháp Năng lượng xanh & Lưu trữ</h3>
+                <p>Áp dụng vật liệu bán dẫn thế hệ mới giúp tối ưu hóa hiệu suất truyền tải dòng điện, giảm thiểu tỏa nhiệt môi trường.</p>
+            </div>
+        </div>
+
+        <!-- HẠNG MỤC NGUỒN LỰC -->
+        <h2>Nguồn Lực Cốt Lõi</h2>
+        <div class="resources-section">
+            <p style="text-align:center; max-width: 800px; margin: 0 auto; color: #64748b;">MINH ÂN tự tin khẳng định vị thế nhờ vào nền tảng nguồn lực vững chắc, đảm bảo cung ứng sản phẩm công nghệ cao liên tục ra thị trường:</p>
+            <div class="res-grid">
+                <div class="res-item">
+                    <span class="icon">🔬</span>
+                    <h4>Trung tâm R&D Cao Cấp</h4>
+                    <p>Hơn 500 kỹ sư hàng đầu liên tục nghiên cứu cải tiến công nghệ số.</p>
+                </div>
+                <div class="res-item">
+                    <span class="icon">🏭</span>
+                    <h4>Nhà Máy Chuẩn Tự Động</h4>
+                    <p>Dây chuyền sản xuất lắp ráp tự động hóa đạt công suất triệu máy/năm.</p>
+                </div>
+                <div class="res-item">
+                    <span class="icon">🌐</span>
+                    <h4>Hạ Tầng Đám Mây Riêng</h4>
+                    <p>Hệ thống máy chủ xử lý dữ liệu độc quyền siêu bảo mật, tốc độ cao.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- DANH SÁCH 30 SẢN PHẨM TRƯNG BÀY -->
+        <h2>Bộ Sưu Tập 30 Sản Phẩm Công Nghệ Cao</h2>
+        <div class="products-grid" id="mainProductsContainer"></div>
+
+    </div>
+
+    <footer><p>&copy; 2026 Công Ty MINH ÂN. Thương hiệu ÂN ĐÂY.</p></footer>
+
+    <script>
+        const items = [
+            "Phone 15 Pro", "Phone 15 Ultra", "Tab Pro S", "Book Luxury", "Watch Series E", 
+            "Buds Noise Cancel", "Cam 360 AI", "Hub Control Center", "Door Lock Biometric", "Switch Automation",
+            "Plug Energy Saver", "Light Strip RGB", "Bulb Smart Ambient", "Sensor Motion Detect", "Sensor Door Security",
+            "Charge Quantum 140W", "Charge Mini 30W", "Powerbank Slim 10k", "Powerbank Max 20k", "SSD Portable Shockproof",
+            "Cable Type-C Armor", "Stand Ergonomic Desk", "Tag Tracker Global", "Mouse Silent Wireless", "Keyboard Mechanical",
+            "Router Mesh Wi-Fi 7", "Speaker Bass Sound", "Pad Wireless Charger", "Air Purifier Smart", "Cooling Fan Desktop"
+        ];
+
+        const container = document.getElementById('mainProductsContainer');
+        items.forEach((name, i) => {
+            let cat = i < 6 ? "Thiết bị cá nhân" : i < 15 ? "Smart-Home" : "Phụ kiện cao cấp";
+            container.innerHTML += `
+                <div class="prod-card">
+                    <div>
+                        <span class="tag">${cat}</span>
+                        <h4>ÂN ${name}</h4>
+                        <p>Thiết bị thông minh tích hợp chip AI xử lý, thuộc bộ giải pháp toàn diện của MINH ÂN.</p>
+                    </div>
+                    <a href="thong-tin.html" class="btn-view">Thông số chi tiết</a>
+                </div>
+            `;
+        });
+    </script>
+</body>
+</html>

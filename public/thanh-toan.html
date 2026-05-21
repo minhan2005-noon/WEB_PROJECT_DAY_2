@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ÂN ĐÂY</title>
+    <script>
+        if (localStorage.getItem('isLoggedIn') !== 'true') { window.location.href = 'dang-nhap.html'; }
+    </script>
+    <style>
+        :root { --primary: #4f46e5; --accent: #0ea5e9; --dark: #1e1b4b; --bg: #f8fafc; --text: #334155; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
+        body { background-color: var(--bg); color: var(--text); }
+        nav { background: var(--dark); padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center; }
+        nav .logo { color: #fff; font-size: 1.5rem; font-weight: bold; }
+        nav ul { display: flex; list-style: none; }
+        nav ul li { margin-left: 1.5rem; }
+        nav ul li a { color: #cbd5e1; text-decoration: none; font-weight: 500; transition: 0.3s; }
+        nav ul li a.active, nav ul li a:hover { color: var(--accent); }
+        .container { padding: 3rem 5%; max-width: 700px; margin: 0 auto; }
+        .payment-card { background: white; padding: 2rem; border-radius: 16px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); margin-top: 2rem; }
+        .method-option { border: 2px solid #e2e8f0; border-radius: 8px; padding: 1rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 1rem; cursor: pointer; }
+        .method-option:hover { border-color: var(--primary); }
+        .btn-finish { width: 100%; background: #10b981; color: white; border: none; padding: 0.75rem; border-radius: 8px; font-weight: bold; cursor: pointer; margin-top: 1rem; }
+        .btn-logout { background: #ef4444; color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">MINH ÂN</div>
+        <ul>
+            <li><a href="index.html">Trang Chủ</a></li>
+            <li><a href="thong-tin.html">Thông Tin</a></li>
+            <li><a href="ve-toi.html">Về Tôi</a></li>
+            <li><a href="mua-hang.html">Mua Hàng</a></li>
+            <li><a href="thanh-toan.html" class="active">Thanh Toán</a></li>
+            <li><a href="lien-he.html">Liên Hệ & FB</a></li>
+            <li><button class="btn-logout" onclick="localStorage.removeItem('isLoggedIn'); window.location.href='dang-nhap.html';">Đăng Xuất</button></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <h2>Phương Thức Thanh Toán Đơn Hàng</h2>
+        <div class="payment-card">
+            <form onsubmit="alert('Giao dịch đã xử lý thành công qua hệ thống cổng bảo mật MINH ÂN!'); window.location.href='index.html'; return false;">
+                <label class="method-option"><input type="radio" name="pay" checked> <div><strong>1. Ví điện tử MoMo</strong><p>Ưu đãi giảm ngay 5% giá trị đơn hàng ÂN</p></div></label>
+                <label class="method-option"><input type="radio" name="pay"> <div><strong>2. Cổng quét mã QR Ngân Hàng (VietQR)</strong><p>Xử lý tự động siêu tốc 24/7</p></div></label>
+                <label class="method-option"><input type="radio" name="pay"> <div><strong>3. Thẻ quốc tế Visa / Mastercard</strong><p>Bảo mật giao dịch mã hóa đầu cuối</p></div></label>
+                <label class="method-option"><input type="radio" name="pay"> <div><strong>4. Ví điện tử ZaloPay</strong><p>Liên kết nhanh thanh toán ngay lập tức</p></div></label>
+                <label class="method-option"><input type="radio" name="pay"> <div><strong>5. Thanh toán khi giao hàng (COD)</strong><p>Nhận sản phẩm ÂN chính hãng rồi trả tiền</p></div></label>
+                <button type="submit" class="btn-finish">Hoàn Tất Thanh Toán Đơn Hàng</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

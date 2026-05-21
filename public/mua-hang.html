@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ÂN ĐÂY</title>
+    <script>
+        if (localStorage.getItem('isLoggedIn') !== 'true') { window.location.href = 'dang-nhap.html'; }
+    </script>
+    <style>
+        :root { --primary: #4f46e5; --accent: #0ea5e9; --dark: #1e1b4b; --bg: #f8fafc; --text: #334155; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
+        body { background-color: var(--bg); color: var(--text); }
+        nav { background: var(--dark); padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center; }
+        nav .logo { color: #fff; font-size: 1.5rem; font-weight: bold; }
+        nav ul { display: flex; list-style: none; }
+        nav ul li { margin-left: 1.5rem; }
+        nav ul li a { color: #cbd5e1; text-decoration: none; font-weight: 500; transition: 0.3s; }
+        nav ul li a.active, nav ul li a:hover { color: var(--accent); }
+        .container { padding: 3rem 5%; max-width: 1300px; margin: 0 auto; }
+        .container h2 { margin-bottom: 2rem; color: var(--dark); text-align: center; }
+        
+        .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1.5rem; }
+        .product-card { background: white; border-radius: 12px; padding: 1.5rem; box-shadow: 0 4px 6px rgba(0,0,0,0.02); border: 1px solid #e2e8f0; display: flex; flex-direction: column; justify-content: space-between; }
+        .product-card h4 { font-size: 1.1rem; color: var(--dark); margin-bottom: 0.5rem; }
+        .product-card p { font-size: 0.85rem; color: #64748b; margin-bottom: 1rem; }
+        .btn-buy { background: var(--primary); color: white; border: none; padding: 0.6rem; border-radius: 6px; font-weight: bold; cursor: pointer; text-align: center; text-decoration: none; font-size: 0.9rem; }
+        .btn-buy:hover { background: var(--accent); }
+        .btn-logout { background: #ef4444; color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">MINH ÂN</div>
+        <ul>
+            <li><a href="index.html">Trang Chủ</a></li>
+            <li><a href="thong-tin.html">Thông Tin</a></li>
+            <li><a href="ve-toi.html">Về Tôi</a></li>
+            <li><a href="mua-hang.html" class="active">Mua Hàng</a></li>
+            <li><a href="thanh-toan.html">Thanh Toán</a></li>
+            <li><a href="lien-he.html">Liên Hệ & FB</a></li>
+            <li><button class="btn-logout" onclick="localStorage.removeItem('isLoggedIn'); window.location.href='dang-nhap.html';">Đăng Xuất</button></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <h2>Danh Mục Hệ Sinh Thái 30 Sản Phẩm Từ MINH ÂN</h2>
+        <div class="products-grid" id="productContainer"></div>
+    </div>
+
+    <script>
+        // Sử dụng JavaScript tự động tạo danh sách chuẩn xác cấu trúc 30 sản phẩm định dạng "ÂN + Tên"
+        const products = [
+            "Phone 15 Pro", "Phone 15 Ultra", "Tab Pro S", "Book Luxury", "Watch Series E", 
+            "Buds Noise Cancel", "Cam 360 AI", "Hub Control Center", "Door Lock Biometric", "Switch Automation",
+            "Plug Energy Saver", "Light Strip RGB", "Bulb Smart Ambient", "Sensor Motion Detect", "Sensor Door Security",
+            "Charge Quantum 140W", "Charge Mini 30W", "Powerbank Slim 10k", "Powerbank Max 20k", "SSD Portable Shockproof",
+            "Cable Type-C Armor", "Stand Ergonomic Desk", "Tag Tracker Global", "Mouse Silent Wireless", "Keyboard Mechanical",
+            "Router Mesh Wi-Fi 7", "Speaker Bass Sound", "Pad Wireless Charger", "Air Purifier Smart", "Cooling Fan Desktop"
+        ];
+
+        const container = document.getElementById('productContainer');
+        products.forEach((name, index) => {
+            container.innerHTML += `
+                <div class="product-card">
+                    <div>
+                        <h4>ÂN ${name}</h4>
+                        <p>Sản phẩm số công nghệ cao mã định danh mã số MA-${2026 + index} thế hệ mới của MINH ÂN.</p>
+                    </div>
+                    <a href="thanh-toan.html" class="btn-buy">Mua Ngay</a>
+                </div>
+            `;
+        });
+    </script>
+</body>
+</html>

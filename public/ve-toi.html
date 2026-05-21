@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ÂN ĐÂY</title>
+    <script>
+        if (localStorage.getItem('isLoggedIn') !== 'true') { window.location.href = 'dang-nhap.html'; }
+    </script>
+    <style>
+        :root { --primary: #4f46e5; --accent: #0ea5e9; --dark: #1e1b4b; --bg: #f8fafc; --text: #334155; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
+        body { background-color: var(--bg); color: var(--text); line-height: 1.7; }
+        nav { background: var(--dark); padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center; }
+        nav .logo { color: #fff; font-size: 1.5rem; font-weight: bold; }
+        nav ul { display: flex; list-style: none; align-items: center; }
+        nav ul li { margin-left: 1.5rem; }
+        nav ul li a { color: #cbd5e1; text-decoration: none; font-weight: 500; }
+        nav ul li a.active, nav ul li a:hover { color: var(--accent); }
+        .btn-logout { background: #ef4444; color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer; font-weight: bold; }
+
+        .container { padding: 4rem 5%; max-width: 1100px; margin: 0 auto; }
+        
+        .section-box { background: white; padding: 3rem; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.03); margin-bottom: 3rem; }
+        .section-box h2 { color: var(--dark); font-size: 1.8rem; margin-bottom: 1.5rem; border-bottom: 2px solid #f1f5f9; padding-bottom: 0.5rem; }
+        
+        /* Bộ Core Values */
+        .values-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; margin-top: 1.5rem; }
+        .value-card { background: #f8fafc; padding: 1.5rem; border-radius: 10px; text-align: center; }
+        .value-card .emoj { font-size: 2rem; display: block; margin-bottom: 0.5rem; }
+        .value-card h4 { color: var(--primary); margin-bottom: 0.5rem; }
+
+        /* Timeline cột mốc */
+        .timeline { position: relative; margin-top: 2rem; padding-left: 20px; border-left: 3px solid #e2e8f0; }
+        .timeline-item { position: relative; margin-bottom: 2rem; }
+        .timeline-item::before { content: ''; position: absolute; left: -26px; top: 5px; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); border: 2px solid white; }
+        .timeline-item .year { font-weight: bold; color: var(--primary); }
+
+        footer { background: var(--dark); color: #94a3b8; text-align: center; padding: 2rem; font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">MINH ÂN</div>
+        <ul>
+            <li><a href="index.html">Trang Chủ</a></li>
+            <li><a href="thong-tin.html">Thông Tin</a></li>
+            <li><a href="ve-toi.html" class="active">Về Tôi</a></li>
+            <li><a href="mua-hang.html">Mua Hàng</a></li>
+            <li><a href="thanh-toan.html">Thanh Toán</a></li>
+            <li><a href="lien-he.html">Liên Hệ & FB</a></li>
+            <li><button class="btn-logout" onclick="localStorage.removeItem('isLoggedIn'); window.location.href='dang-nhap.html';">Đăng Xuất</button></li>
+        </ul>
+    </nav>
+    
+    <div class="container">
+        
+        <!-- KHỐI 1: TẦM NHÌN SỨ MỆNH -->
+        <div class="section-box">
+            <h2>Tầm Nhìn & Chiến Lược 2030</h2>
+            <p>Được kiến tạo từ nền tảng vững chắc, công ty <strong>MINH ÂN</strong> định vị trở thành tập đoàn đa quốc gia đứng đầu trong lĩnh vực thiết bị số và giải pháp nhà thông minh tuần hoàn vào năm 2030. Chúng tôi cam kết đưa khẩu hiệu hành động <strong>"ÂN ĐÂY"</strong> trở thành biểu tượng kết nối uy tín, tin cậy tuyệt đối cho mọi gia đình Việt.</p>
+            
+            <div class="values-grid">
+                <div class="value-card"><span class="emoj">⚡</span><h4>Tốc độ</h4><p>Xử lý dữ liệu tối ưu, đáp ứng tức thì.</p></div>
+                <div class="value-card"><span class="emoj">🔒</span><h4>Bảo mật</h4><p>Mã hóa đầu cuối dữ liệu đám mây độc quyền.</p></div>
+                <div class="value-card"><span class="emoj">♻️</span><h4>Xanh</h4><p>Vật liệu tái chế thân thiện môi trường.</p></div>
+            </div>
+        </div>
+
+        <!-- KHỐI 2: LỊCH SỬ PHÁT TRIỂN -->
+        <div class="section-box">
+            <h2>Lịch Sử Chặng Đường Phát Triển</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="year">Năm 2022</div>
+                    <p>Thành lập công ty TNHH MINH ÂN, đặt nền móng phòng nghiên cứu vi xử lý đầu tiên.</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="year">Năm 2024</div>
+                    <p>Ra mắt trọn bộ giải pháp điều khiển phần cứng Smart-Home, phủ sóng 63 tỉnh thành.</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="year">Năm 2026 (Hiện tại)</div>
+                    <p>Mở rộng quy mô danh mục lên 30 thiết bị tối tân dòng ÂN, cán mốc 2 triệu người dùng toàn hệ thống.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- KHỐI 3: BAN LÃNH ĐẠO -->
+        <div class="section-box">
+            <h2>Đội Ngũ Quản Trị Cấp Cao</h2>
+            <p>Hệ thống điều hành của MINH ÂN được dẫn dắt bởi những chuyên gia có thâm niên hơn 15 năm trong ngành công nghiệp bán dẫn và quản trị chuỗi cung ứng toàn cầu, cam kết mang lại sự minh bạch, định hướng phát triển vững chắc dài hạn cho toàn bộ hệ sinh thái.</p>
+        </div>
+
+    </div>
+    
+    <footer><p>&copy; 2026 Công Ty MINH ÂN. Thương hiệu ÂN ĐÂY.</p></footer>
+</body>
+</html>

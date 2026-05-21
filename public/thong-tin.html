@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ÂN ĐÂY</title>
+    <script>
+        if (localStorage.getItem('isLoggedIn') !== 'true') { window.location.href = 'dang-nhap.html'; }
+    </script>
+    <style>
+        :root { --primary: #4f46e5; --accent: #0ea5e9; --dark: #1e1b4b; --bg: #f8fafc; --text: #334155; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
+        body { background-color: var(--bg); color: var(--text); }
+        nav { background: var(--dark); padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center; }
+        nav .logo { color: #fff; font-size: 1.5rem; font-weight: bold; }
+        nav ul { display: flex; list-style: none; align-items: center; }
+        nav ul li { margin-left: 1.5rem; }
+        nav ul li a { color: #cbd5e1; text-decoration: none; font-weight: 500; }
+        nav ul li a.active, nav ul li a:hover { color: var(--accent); }
+        .btn-logout { background: #ef4444; color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer; font-weight: bold; }
+
+        .container { padding: 3rem 5%; max-width: 1400px; margin: 0 auto; }
+        
+        /* Dashboard Thống Kê Tổng Quan */
+        .dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
+        .dash-card { background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.02); border-top: 4px solid var(--primary); text-align: center; }
+        .dash-card h3 { font-size: 0.9rem; color: #64748b; text-transform: uppercase; margin-bottom: 0.5rem; }
+        .dash-card .number { font-size: 1.8rem; font-weight: bold; color: var(--dark); }
+
+        .table-title { font-size: 1.6rem; color: var(--dark); margin-bottom: 1.5rem; border-left: 5px solid var(--primary); padding-left: 12px; }
+        .table-responsive { overflow-x: auto; background: white; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; }
+        table { width: 100%; border-collapse: collapse; text-align: left; min-width: 1000px; }
+        th { background: #f1f5f9; padding: 1rem; font-weight: 600; color: var(--dark); }
+        td { padding: 1rem; border-top: 1px solid #e2e8f0; font-size: 0.9rem; }
+        tr:hover { background: #f8fafc; }
+        
+        .badge { padding: 0.25rem 0.5rem; border-radius: 6px; font-size: 0.75rem; font-weight: bold; }
+        .bg-success { background: #d1fae5; color: #065f46; }
+        .bg-warning { background: #fef3c7; color: #92400e; }
+
+        footer { background: var(--dark); color: #94a3b8; text-align: center; padding: 2rem; font-size: 0.9rem; margin-top: 5rem; }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">MINH ÂN</div>
+        <ul>
+            <li><a href="index.html">Trang Chủ</a></li>
+            <li><a href="thong-tin.html" class="active">Thông Tin</a></li>
+            <li><a href="ve-toi.html">Về Tôi</a></li>
+            <li><a href="mua-hang.html">Mua Hàng</a></li>
+            <li><a href="thanh-toan.html">Thanh Toán</a></li>
+            <li><a href="lien-he.html">Liên Hệ & FB</a></li>
+            <li><button class="btn-logout" onclick="localStorage.removeItem('isLoggedIn'); window.location.href='dang-nhap.html';">Đăng Xuất</button></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        
+        <!-- BẢNG THỐNG KÊ MỌI THỨ DẠNG DASHBOARD -->
+        <div class="table-title">Thống Kê Mọi Thứ & Chỉ Số Hệ Hệ Thống (Năm 2026)</div>
+        <div class="dashboard-grid">
+            <div class="dash-card"><h3>Tổng danh mục sản phẩm</h3><div class="number">30 / 30</div></div>
+            <div class="dash-card" style="border-top-color: #10b981;"><h3>Tỷ lệ bảo trì thành công</h3><div class="number">99.4%</div></div>
+            <div class="dash-card" style="border-top-color: #f59e0b;"><h3>Hạn hỗ trợ cập nhật</h3><div class="number">Tối thiểu 5 năm</div></div>
+            <div class="dash-card" style="border-top-color: #ef4444;"><h3>Mức hư hại trung bình</h3><div class="number">&lt; 0.4%</div></div>
+        </div>
+
+        <!-- BẢNG LIỆT KÊ 30 SẢN PHẨM CHI TIẾT -->
+        <div class="table-title">Báo Cáo Chi Tiết Linh Kiện & Thị Trường Ngày Nay</div>
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Tên Thiết Bị</th>
+                        <th>Giá Ước Tính</th>
+                        <th>Thị Trường Ngày Nay</th>
+                        <th>Mức Độ Bảo Trì</th>
+                        <th>Kế Hoạch Khấu Hao / Sửa Chữa</th>
+                        <th>Update / Develop</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody"></tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <footer><p>&copy; 2026 Công Ty MINH ÂN. Thương hiệu ÂN ĐÂY.</p></footer>
+
+    <script>
+        const productsList = [
+            "Phone 15 Pro", "Phone 15 Ultra", "Tab Pro S", "Book Luxury", "Watch Series E", 
+            "Buds Noise Cancel", "Cam 360 AI", "Hub Control Center", "Door Lock Biometric", "Switch Automation",
+            "Plug Energy Saver", "Light Strip RGB", "Bulb Smart Ambient", "Sensor Motion Detect", "Sensor Door Security",
+            "Charge Quantum 140W", "Charge Mini 30W", "Powerbank Slim 10k", "Powerbank Max 20k", "SSD Portable Shockproof",
+            "Cable Type-C Armor", "Stand Ergonomic Desk", "Tag Tracker Global", "Mouse Silent Wireless", "Keyboard Mechanical",
+            "Router Mesh Wi-Fi 7", "Speaker Bass Sound", "Pad Wireless Charger", "Air Purifier Smart", "Cooling Fan Desktop"
+        ];
+
+        const tbody = document.getElementById('tableBody');
+        
+        productsList.forEach((name, idx) => {
+            let basePrice = (35000000 - (idx * 1100000)).toLocaleString('vi-VN') + "đ";
+            let statusBadge = idx % 3 === 0 ? '<span class="badge bg-success">Rất Thấp</span>' : '<span class="badge bg-warning">Tiêu Chuẩn</span>';
+            
+            tbody.innerHTML += `
+                <tr>
+                    <td>${idx + 1}</td>
+                    <td><strong>ÂN ${name}</strong></td>
+                    <td>${basePrice}</td>
+                    <td>Tăng trưởng mạnh mẽ</td>
+                    <td>${statusBadge}</td>
+                    <td>Hỗ trợ thay mới mô-đun</td>
+                    <td>Hỗ trợ vá lỗi OS hàng tháng</td>
+                </tr>
+            `;
+        });
+    </script>
+</body>
+</html>

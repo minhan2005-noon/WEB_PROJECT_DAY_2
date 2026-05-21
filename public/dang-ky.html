@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ÂN ĐÂY</title>
+    <style>
+        :root { --primary: #4f46e5; --accent: #0ea5e9; --dark: #1e1b4b; --bg: #f8fafc; --text: #334155; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
+        body { background-color: var(--bg); color: var(--text); min-height: 100vh; display: flex; flex-direction: column; }
+        nav { background: var(--dark); padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center; }
+        nav .logo { color: #fff; font-size: 1.5rem; font-weight: bold; }
+        nav ul { display: flex; list-style: none; }
+        nav ul li { margin-left: 1.5rem; }
+        nav ul li a { color: #cbd5e1; text-decoration: none; font-weight: 500; }
+        .auth-container { flex-grow: 1; display: flex; align-items: center; justify-content: center; padding: 2rem; }
+        .auth-card { background: white; width: 100%; max-width: 400px; padding: 2.5rem; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; }
+        .auth-card h2 { color: var(--dark); text-align: center; margin-bottom: 1rem; }
+        .auth-card p { font-size: 0.85rem; color: #64748b; text-align: center; margin-bottom: 1.5rem; }
+        .form-group { margin-bottom: 1.25rem; }
+        .form-group label { display: block; font-size: 0.9rem; font-weight: 600; margin-bottom: 0.5rem; }
+        .form-control { width: 100%; padding: 0.75rem 1rem; border: 1px solid #cbd5e1; border-radius: 8px; outline: none; }
+        .btn-submit { width: 100%; background: var(--primary); color: white; border: none; padding: 0.75rem; border-radius: 8px; font-weight: 600; cursor: pointer; }
+        .auth-footer { text-align: center; margin-top: 1.5rem; font-size: 0.9rem; }
+        .auth-footer a { color: var(--primary); text-decoration: none; font-weight: bold; }
+        footer { background: var(--dark); color: #94a3b8; text-align: center; padding: 1.5rem; }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">MINH ÂN</div>
+        <ul>
+            <li><a href="index.html">Trang Chủ</a></li>
+            <li><a href="thong-tin.html">Thông Tin</a></li>
+            <li><a href="ve-toi.html">Về Tôi</a></li>
+            <li><a href="mua-hang.html">Mua Hàng</a></li>
+            <li><a href="thanh-toan.html">Thanh Toán</a></li>
+            <li><a href="lien-he.html">Liên Hệ & FB</a></li>
+            <li><a href="dang-nhap.html">Đăng Nhập</a></li>
+        </ul>
+    </nav>
+    
+    <div class="auth-container">
+        <div class="auth-card">
+            <h2>Đăng Ký / Cấp Lại</h2>
+            <p>Giải pháp tối ưu khi không có tài khoản hoặc quên mật khẩu hệ thống</p>
+            
+            <form id="registerForm">
+                <div class="form-group">
+                    <label>Họ và Tên</label>
+                    <input type="text" id="fullname" class="form-control" placeholder="Nguyễn Văn Ân" required>
+                </div>
+                <div class="form-group">
+                    <label>Địa chỉ Email</label>
+                    <input type="email" id="email" class="form-control" placeholder="name@example.com" required>
+                </div>
+                <div class="form-group">
+                    <label>Mật khẩu mới</label>
+                    <input type="password" id="password" class="form-control" placeholder="••••••••" required>
+                </div>
+                <button type="submit" class="btn-submit">Xác Nhận Đăng Ký</button>
+            </form>
+
+            <div class="auth-footer">Đã có tài khoản? <a href="dang-nhap.html">Quay lại đăng nhập</a></div>
+        </div>
+    </div>
+
+    <footer><p>&copy; 2026 Công Ty MINH ÂN. Thương hiệu ÂN ĐÂY.</p></footer>
+
+    <script>
+        document.getElementById('registerForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const fullname = document.getElementById('fullname').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            try {
+                const response = await fetch('/api/auth/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ fullname, email, password })
+                });
+                const data = await response.json();
+                
+                if (data.success) {
+                    alert(data.message);
+                    window.location.href = 'dang-nhap.html';
+                } else {
+                    alert(data.message);
+                }
+            } catch (error) {
+                alert('Không thể kết nối đến server backend hiện tại!');
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ÂN ĐÂY</title>
+    <script>
+        if (localStorage.getItem('isLoggedIn') !== 'true') { window.location.href = 'dang-nhap.html'; }
+    </script>
+    <style>
+        :root { --primary: #4f46e5; --accent: #0ea5e9; --dark: #1e1b4b; --bg: #f8fafc; --text: #334155; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
+        body { background-color: var(--bg); color: var(--text); }
+        nav { background: var(--dark); padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center; }
+        nav .logo { color: #fff; font-size: 1.5rem; font-weight: bold; }
+        nav ul { display: flex; list-style: none; }
+        nav ul li { margin-left: 1.5rem; }
+        nav ul li a { color: #cbd5e1; text-decoration: none; font-weight: 500; transition: 0.3s; }
+        nav ul li a.active, nav ul li a:hover { color: var(--accent); }
+        .container { padding: 3rem 5%; max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+        .box { background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        .box h3 { margin-bottom: 1rem; color: var(--dark); }
+        .form-group { margin-bottom: 1rem; }
+        .form-group label { display: block; font-size: 0.85rem; font-weight: bold; margin-bottom: 0.3rem; }
+        .form-control { width: 100%; padding: 0.6rem; border: 1px solid #cbd5e1; border-radius: 6px; outline: none; }
+        textarea.form-control { height: 80px; resize: none; }
+        .btn-submit { background: var(--primary); color: white; border: none; padding: 0.6rem 1.5rem; border-radius: 6px; cursor: pointer; font-weight: bold; }
+        .btn-logout { background: #ef4444; color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">MINH ÂN</div>
+        <ul>
+            <li><a href="index.html">Trang Chủ</a></li>
+            <li><a href="thong-tin.html">Thông Tin</a></li>
+            <li><a href="ve-toi.html">Về Tôi</a></li>
+            <li><a href="mua-hang.html">Mua Hàng</a></li>
+            <li><a href="thanh-toan.html">Thanh Toán</a></li>
+            <li><a href="lien-he.html" class="active">Liên Hệ & FB</a></li>
+            <li><button class="btn-logout" onclick="localStorage.removeItem('isLoggedIn'); window.location.href='dang-nhap.html';">Đăng Xuất</button></li>
+        </ul>
+    </nav>
+    
+    <div class="container">
+        <div class="box">
+            <h3>Tổng Đài Trung Tâm MINH ÂN</h3>
+            <p style="margin-bottom: 1rem;">Mọi thắc mắc vui lòng gửi yêu cầu tư vấn đến hòm thư chính thức:</p>
+            <p><strong>Email Tư Vấn:</strong> <a href="mailto:23137001@hcmus.edu.vn" style="color:var(--primary); font-weight: bold; text-decoration: none;">23137001@hcmus.edu.vn</a></p>
+            <p style="margin-top: 0.5rem;"><strong>Hotline hỗ trợ:</strong> 0938508330</p>
+        </div>
+        
+        <div class="box">
+            <h3>Gửi Ý Kiến Phản Hồi (Feedback)</h3>
+            <form id="feedbackForm">
+                <div class="form-group">
+                    <label for="feedback-email">Email của bạn</label>
+                    <input id="feedback-email" type="email" class="form-control" placeholder="Nhập email của bạn" required>
+                </div>
+                <div class="form-group">
+                    <label for="feedback-message">Nội dung feedback ý kiến</label>
+                    <textarea id="feedback-message" class="form-control" placeholder="Ý kiến đóng góp..." required></textarea>
+                </div>
+                <button type="submit" class="btn-submit">Gửi Phản Hồi</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('feedbackForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('feedback-email').value;
+            const message = document.getElementById('feedback-message').value;
+
+            try {
+                const response = await fetch('/api/feedback', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, message })
+                });
+                const data = await response.json();
+
+                if (data.success) {
+                    alert('Cảm ơn bạn đã gửi đóng góp ý kiến phản hồi về sản phẩm ÂN!');
+                    document.getElementById('feedbackForm').reset();
+                } else {
+                    alert('Lỗi: ' + data.message);
+                }
+            } catch (error) {
+                alert('Không thể kết nối đến máy chủ. Vui lòng thử lại sau ít phút!');
+            }
+        });
+    </script>
+</body>
+</html>
